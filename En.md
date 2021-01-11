@@ -226,6 +226,7 @@ public class SystemTime
 ```
 The simple trick here is that there are special functions on the SystemTime class that allow you to alter the current time throughout the system. That is, everyone who uses this SystemTime class will see whatever date and time you choose.
 This gives you a perfect way to test that the current time is used in your production code through a simple test like the one in the next listing.
+
 > Listing 7.2 A test using SystemTime
 ```csharp=
 [TestFixture]
@@ -247,6 +248,7 @@ public class TimeLoggerTests
     }
 }
 ```
+
 As a bonus, you don’t need to inject a million interfaces into your app. The price you pay is a simple [TearDown] method in your test class that makes sure any test doesn’t change the time for other tests.
 But you need to take into account that the system’s current culture (en-US versus en-GB, for example) can change the output string. In that case, you can also include a CultureInfoAttribute, in NUnit, on the test to force the test to run under a specific culture.
 This type of external abstraction of a cross-cutting concern allows you to create a fake focal point in your production code instead of many small ones. But it only makes sense for things that are used throughout the system. If you use this for everything, you end up with a system that might be just as hard to read as what you’re trying to avoid.
